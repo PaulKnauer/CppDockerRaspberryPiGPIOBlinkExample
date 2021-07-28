@@ -14,15 +14,10 @@ RUN make main
 
 FROM raspbian/stretch
 
-RUN addgroup --gid 2000 paulknauer && \
-    adduser --system --uid 2000 --ingroup paulknauer paulknauer
-    
-USER paulknauer:paulknauer
+RUN apt-get -y update \
+&& apt-get -y install wiringpi
 
 WORKDIR /usr/local/bin
-
-RUN apt-get -y update \
-&& apt-get -y install wiringpi 
 
 COPY --from=builder /usr/src/app/main ./main
 
