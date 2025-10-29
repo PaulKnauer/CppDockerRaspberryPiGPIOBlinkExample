@@ -1,9 +1,9 @@
-FROM raspbian/stretch AS builder
+FROM ubuntu:questing AS builder
 
 LABEL autodelete="true"
 
 RUN apt-get -y update \
-&& apt-get -y install build-essential wiringpi
+&& apt-get -y install build-essential wiringpi libwiringpi-dev
 
 WORKDIR /usr/src/app
 
@@ -12,7 +12,7 @@ COPY Makefile .
 
 RUN make main
 
-FROM raspbian/stretch
+FROM ubuntu:questing
 
 RUN apt-get -y update \
 && apt-get -y install wiringpi
